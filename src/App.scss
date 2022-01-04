@@ -1,0 +1,20 @@
+.jg {
+  padding: 10rem 0;
+  font-size: calc(10px + 2vmin);
+  line-height: 1.7;
+  color: #5b5e6b;
+  min-height: 100vh;
+
+  &__greeting {
+  }
+
+  &__logo {
+    margin-bottom: 5rem;
+  }
+
+  &__hello {
+    color: #42454f;
+    font-weight: 700;
+    font-size: 200%;
+  }
+}

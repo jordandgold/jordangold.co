@@ -1,25 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./hello-jordan-gold.svg";
+import {
+  ChakraProvider,
+  Container,
+  Divider,
+  Link,
+  List,
+  ListIcon,
+  ListItem,
+} from "@chakra-ui/react";
+
+import "./App.scss";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 function App() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChakraProvider>
+      <Container maxW="container.sm">
+        <div className="jg">
+          <img src={logo} className="jg__logo" alt="logo" />
+          <div className="jg__greeting">
+            <div className="jg__hello">Hello,</div>
+            <p>
+              my name is Jordan Gold. I'm a UI designer and front-end developer
+              based in Boulder, Colorado. Being normal is boring.
+            </p>
+            <Divider marginY={8} color={`#dfe5f3`} borderTopWidth={`2px`} />
+            <List spacing={5}>
+              <ListItem>
+                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
+                <Link
+                  className="jg__link"
+                  href="http://github.com/jordandgold"
+                  target="_blank"
+                  color={`#187fe0`}
+                >
+                  GitHub
+                </Link>
+              </ListItem>
+              <ListItem>
+                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
+                <Link
+                  className="jg__link"
+                  href="https://www.linkedin.com/in/jordandgold/"
+                  target="_blank"
+                  color={`#187fe0`}
+                >
+                  LinkedIn
+                </Link>
+              </ListItem>
+            </List>
+            <Divider marginY={8} color={`#dfe5f3`} borderTopWidth={`2px`} />
+            <p>copyright &copy; jordangold.co {currentYear}</p>
+          </div>
+        </div>
+      </Container>
+    </ChakraProvider>
   );
 }
 
