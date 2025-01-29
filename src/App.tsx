@@ -24,11 +24,22 @@ function App() {
           <div className="jg__greeting">
             <div className="jg__hello">Hello,</div>
             <p>
-              my name is Jordan Gold. I'm a UI designer and front-end developer
-              based in Boulder, Colorado. Being normal is boring.
+              my name is Jordan Gold. I'm a software enginer and web developer
+              based in Chicago, Illinois.
             </p>
             <Divider marginY={8} color={`#dfe5f3`} borderTopWidth={`2px`} />
             <List spacing={5}>
+              <ListItem>
+                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
+                <Link
+                  className="jg__link"
+                  href="mailto:jordandgold@gmail.com"
+                  target="_blank"
+                  color={`#187fe0`}
+                >
+                  Email
+                </Link>
+              </ListItem>
               <ListItem>
                 <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
                 <Link
