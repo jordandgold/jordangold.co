@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.33607aa2.css",
+    "main.js": "/static/js/main.63536621.js",
+    "static/js/787.4e625a1d.chunk.js": "/static/js/787.4e625a1d.chunk.js",
+    "static/media/hello-jordan-gold.svg": "/static/media/hello-jordan-gold.9480e3b17e64c999f858da7eecd30581.svg",
+    "index.html": "/index.html",
+    "main.33607aa2.css.map": "/static/css/main.33607aa2.css.map",
+    "main.63536621.js.map": "/static/js/main.63536621.js.map",
+    "787.4e625a1d.chunk.js.map": "/static/js/787.4e625a1d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.33607aa2.css",
+    "static/js/main.63536621.js"
+  ]
+}
