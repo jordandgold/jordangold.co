@@ -17,7 +17,13 @@ import {
   Routes,
 } from "react-router-dom";
 
-import { applyTheme, getInitialTheme, Theme } from "./theme";
+import {
+  applyTheme,
+  getInitialTheme,
+  onSystemThemeChange,
+  saveTheme,
+  Theme,
+} from "./theme";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Work from "./pages/Work";
@@ -31,6 +37,13 @@ function Layout() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => applyTheme(theme), [theme]);
+  useEffect(() => onSystemThemeChange(setTheme), []);
+
+  const toggleTheme = () => {
+    const next = theme === "dark" ? "light" : "dark";
+    saveTheme(next);
+    setTheme(next);
+  };
 
   return (
     <Container style={{ maxWidth: "64em" }}>
@@ -57,19 +70,14 @@ function Layout() {
             type="button"
             className="navbar__toggle"
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={toggleTheme}
           >
             {theme === "dark" ? <LuSun /> : <LuMoon />}
           </button>
         </div>
       </nav>
       <div
-        style={{
-          padding: location.pathname === "/" ? "6rem 0" : "0 0 6rem",
-          fontSize: "calc(8px + 1.5vmin)",
-          lineHeight: 1.7,
-          minHeight: "calc(100vh - 5.5rem)",
-        }}
+        className={location.pathname === "/" ? "layout layout--home" : "layout"}
       >
         <div key={location.pathname} className="page">
           <Outlet />
