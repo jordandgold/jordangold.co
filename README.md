@@ -1,46 +1,60 @@
-# Getting Started with Create React App
+# jordangold.co
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal site for Jordan Gold, built with React 19, TypeScript, [Chakra UI](https://chakra-ui.com) v3 and [React Router](https://reactrouter.com), bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Getting started
 
-In the project directory, you can run:
+```sh
+npm install
+npm start
+```
 
-### `yarn start`
+Open [http://localhost:3000](http://localhost:3000). The page reloads when you edit files.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`.npmrc` sets `legacy-peer-deps=true` because `react-scripts` 5 declares a TypeScript 4 peer dependency, while the project uses TypeScript 5.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Scripts
 
-### `yarn test`
+- `npm start` runs the dev server.
+- `npm run build` creates a production build in `build/`.
+- `npm test` runs the test runner (there are no tests yet).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Project structure
 
-### `yarn build`
+```
+public/index.html   HTML shell: initial loading spinner and pre-paint theme script
+src/index.tsx       Entry point: applies the theme, then renders the app in BrowserRouter
+src/App.tsx         Layout (navbar, theme toggle, footer) and route definitions
+src/pages/          Home, Work and About pages
+src/theme.ts        Light/dark theme helpers
+src/index.css       All shared styles, theme colors and animations
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Routes
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Path     | Page  |
+| -------- | ----- |
+| `/`      | Home  |
+| `/work`  | Work  |
+| `/about` | About |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Any other path redirects to `/`.
 
-### `yarn eject`
+## Styling
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Shared styles live in `src/index.css`. Colors are CSS variables on `:root`, with dark values under `:root[data-theme="dark"]`.
+- One-off styles are inline `style` props in the components.
+- Chakra's styles are layered, so the unlayered rules in `index.css` take precedence.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Dark mode
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The theme defaults to the system preference and is saved in `localStorage` once toggled. An inline script in `public/index.html` sets `data-theme` before first paint, so there is no flash of the wrong theme.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Loading and transitions
 
-## Learn More
+- `public/index.html` shows a spinner inside `#root` until the JS bundle loads and React replaces it.
+- Components fade up on load, staggered by position, and each page fades in on route change. Animations are disabled for users who prefer reduced motion.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Deployment
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`npm run build` outputs the static site to `build/`. Because the site uses client-side routing, the host must serve `index.html` for unknown paths so that direct visits to `/work` and `/about` work.

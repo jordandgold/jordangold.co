@@ -1,73 +1,99 @@
-import React from "react";
-import logo from "./hello-jordan-gold.svg";
+import headshot from "./Jordan_Gold.jpg";
 import {
   ChakraProvider,
   Container,
-  Divider,
-  Link,
-  List,
-  ListIcon,
-  ListItem,
+  defaultSystem,
+  Separator,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { LuMoon, LuSun } from "react-icons/lu";
+import {
+  Link,
+  NavLink,
+  Navigate,
+  Outlet,
+  useLocation,
+  Route,
+  Routes,
+} from "react-router-dom";
 
-import "./App.scss";
-import { ExternalLinkIcon } from "@chakra-ui/icons";
+import { applyTheme, getInitialTheme, Theme } from "./theme";
+import About from "./pages/About";
+import Home from "./pages/Home";
+import Work from "./pages/Work";
 
-function App() {
+const navLinkClassName = ({ isActive }: { isActive: boolean }) =>
+  isActive ? "navbar__link navbar__link--active" : "navbar__link";
+
+function Layout() {
   const currentYear = new Date().getFullYear();
+  const location = useLocation();
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
+
+  useEffect(() => applyTheme(theme), [theme]);
 
   return (
-    <ChakraProvider>
-      <Container maxW="container.sm">
-        <div className="jg">
-          <img src={logo} className="jg__logo" alt="logo" />
-          <div className="jg__greeting">
-            <div className="jg__hello">Hello,</div>
-            <p>
-              my name is Jordan Gold. I'm a software enginer and web developer
-              based in Chicago, Illinois.
-            </p>
-            <Divider marginY={8} color={`#dfe5f3`} borderTopWidth={`2px`} />
-            <List spacing={5}>
-              <ListItem>
-                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
-                <Link
-                  className="jg__link"
-                  href="mailto:jordandgold@gmail.com"
-                  target="_blank"
-                  color={`#187fe0`}
-                >
-                  Email
-                </Link>
-              </ListItem>
-              <ListItem>
-                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
-                <Link
-                  className="jg__link"
-                  href="http://github.com/jordandgold"
-                  target="_blank"
-                  color={`#187fe0`}
-                >
-                  GitHub
-                </Link>
-              </ListItem>
-              <ListItem>
-                <ListIcon as={ExternalLinkIcon} color={`#dfe5f3`} />
-                <Link
-                  className="jg__link"
-                  href="https://www.linkedin.com/in/jordandgold/"
-                  target="_blank"
-                  color={`#187fe0`}
-                >
-                  LinkedIn
-                </Link>
-              </ListItem>
-            </List>
-            <Divider marginY={8} color={`#dfe5f3`} borderTopWidth={`2px`} />
-            <p>copyright &copy; jordangold.co {currentYear}</p>
+    <Container style={{ maxWidth: "64em" }}>
+      <nav className="navbar fade-in">
+        <Link className="navbar__profile" to="/">
+          <span className="navbar__avatar">
+            <img src={headshot} alt="Jordan Gold" />
+          </span>
+          <span className="navbar__brand">Jordan Gold</span>
+        </Link>
+        <div className="navbar__right">
+          <div className="navbar__links">
+            <NavLink className={navLinkClassName} to="/" end>
+              Home
+            </NavLink>
+            <NavLink className={navLinkClassName} to="/work">
+              Work
+            </NavLink>
+            <NavLink className={navLinkClassName} to="/about">
+              About
+            </NavLink>
           </div>
+          <button
+            type="button"
+            className="navbar__toggle"
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          >
+            {theme === "dark" ? <LuSun /> : <LuMoon />}
+          </button>
         </div>
-      </Container>
+      </nav>
+      <div
+        style={{
+          padding: location.pathname === "/" ? "6rem 0" : "0 0 6rem",
+          fontSize: "calc(8px + 1.5vmin)",
+          lineHeight: 1.7,
+          minHeight: "calc(100vh - 5.5rem)",
+        }}
+      >
+        <div key={location.pathname} className="page">
+          <Outlet />
+        </div>
+        <div className="footer fade-in">
+          <Separator className="divider" />
+          <p>copyright &copy; jordangold.co {currentYear}</p>
+        </div>
+      </div>
+    </Container>
+  );
+}
+
+function App() {
+  return (
+    <ChakraProvider value={defaultSystem}>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="work" element={<Work />} />
+          <Route path="about" element={<About />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
     </ChakraProvider>
   );
 }
