@@ -1,14 +1,15 @@
-import CubeIcon from "../CubeIcon";
-import workdayLogo from "../logos/workday.svg";
-import servicenowLogo from "../logos/servicenow.png";
+import CubeIcon from "../CubeIcon"
+import workdayLogo from "../logos/workday.svg"
+import servicenowLogo from "../logos/servicenow.png"
+import depaulLogo from "../logos/depaul.svg"
 
 type Job = {
-  company: string;
-  logo: string;
-  role: string;
-  dates: string;
-  highlights: string[];
-};
+  company: string
+  logo: string
+  role: string
+  dates: string
+  highlights: string[]
+}
 
 const experience: Job[] = [
   {
@@ -25,6 +26,16 @@ const experience: Job[] = [
     ],
   },
   {
+    company: "ServiceNow",
+    logo: servicenowLogo,
+    role: "Software Engineer",
+    dates: "September 2021 – January 2022",
+    highlights: [
+      "Developed front-end features for the UI Builder team, contributing to a large-scale enterprise web application.",
+      "Built reusable UI functionality and collaborated with product, design, and engineering teams to deliver customer-facing features.",
+    ],
+  },
+  {
     company: "Workday",
     logo: workdayLogo,
     role: "Software Engineer II",
@@ -37,17 +48,7 @@ const experience: Job[] = [
       "Contributed to production operations through monitoring, alerting, troubleshooting, and customer support.",
     ],
   },
-  {
-    company: "ServiceNow",
-    logo: servicenowLogo,
-    role: "Software Engineer",
-    dates: "September 2021 – January 2022",
-    highlights: [
-      "Developed front-end features for the UI Builder team, contributing to a large-scale enterprise web application.",
-      "Built reusable UI functionality and collaborated with product, design, and engineering teams to deliver customer-facing features.",
-    ],
-  },
-];
+]
 
 const skills: { label: string; items: string[] }[] = [
   {
@@ -103,7 +104,7 @@ const skills: { label: string; items: string[] }[] = [
       "WCAG 2.1 AA",
     ],
   },
-];
+]
 
 function Work() {
   return (
@@ -166,8 +167,44 @@ function Work() {
           </div>
         </div>
       </section>
+
+      <section className="resume__section">
+        <h2 className="heading heading--icon resume__label">
+          <CubeIcon />
+          Education
+        </h2>
+        <div className="resume__content">
+          <article className="job">
+            <header className="job__header">
+              <div className="job__title">
+                <img
+                  className="job__logo job__logo--shield"
+                  src={depaulLogo}
+                  alt=""
+                  width={32}
+                  height={32}
+                />
+                <div className="job__text">
+                  <div className="job__company">DePaul University</div>
+                  <div className="job__role">
+                    School of Computing &amp; Digital Media
+                  </div>
+                </div>
+              </div>
+              <div className="job__dates">August 2011 – April 2015</div>
+            </header>
+            <ul className="job__highlights">
+              <li>
+                Coursework focused on human-computer interaction, user
+                experience design, and front-end software engineering. Degree
+                not completed. Left in my senior year to enter the workforce.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
     </>
-  );
+  )
 }
 
-export default Work;
+export default Work

@@ -597,3 +597,8 @@ code {
     padding: 3rem 0 2rem;
   }
 }
+
+/* The DePaul shield isn't a square badge, so don't round or crop its corners */
+.job__logo--shield {
+  border-radius: 0;
+}
