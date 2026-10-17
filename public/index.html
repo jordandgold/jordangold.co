@@ -62,6 +62,19 @@
       }
     </style>
     <script>
+      // Restore the URL saved by 404.html so direct visits to /about etc. work
+      (function () {
+        var redirect;
+        try {
+          redirect = sessionStorage.getItem("redirect");
+          sessionStorage.removeItem("redirect");
+        } catch (e) {}
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, "", redirect);
+        }
+      })();
+    </script>
+    <script>
       // Apply the saved or system theme before first paint to avoid a flash
       (function () {
         var theme;

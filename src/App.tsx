@@ -10,7 +10,6 @@ import { LuMoon, LuSun } from "react-icons/lu";
 import {
   Link,
   NavLink,
-  Navigate,
   Outlet,
   useLocation,
   Route,
@@ -24,8 +23,10 @@ import {
   saveTheme,
   Theme,
 } from "./theme";
+import SocialLinks from "./SocialLinks";
 import About from "./pages/About";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import Work from "./pages/Work";
 
 const navLinkClassName = ({ isActive }: { isActive: boolean }) =>
@@ -84,6 +85,8 @@ function Layout() {
         </div>
         <div className="footer fade-in">
           <Separator className="divider" />
+          <SocialLinks />
+          <Separator className="divider" />
           <p>copyright &copy; jordangold.co {currentYear}</p>
         </div>
       </div>
@@ -99,7 +102,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="work" element={<Work />} />
           <Route path="about" element={<About />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </ChakraProvider>

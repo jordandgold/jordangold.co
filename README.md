@@ -57,4 +57,8 @@ The theme defaults to the system preference and is saved in `localStorage` once 
 
 ## Deployment
 
-`npm run build` outputs the static site to `build/`. Because the site uses client-side routing, the host must serve `index.html` for unknown paths so that direct visits to `/work` and `/about` work.
+`npm run build` outputs the static site to `build/`.
+
+The site uses client-side routing, so a direct visit to `/work` or `/about` has no matching file on a static host. `public/404.html` handles this on any host that serves `/404.html` for missing paths (GitHub Pages, Netlify, Cloudflare Pages, Vercel): it saves the requested URL and sends the visitor to `/`, and an inline script in `public/index.html` restores the URL before React Router starts. Paths that don't match a page render `src/pages/NotFound.tsx`.
+
+This costs one quick redirect on direct visits, and the server still answers with a 404 status. If your host supports rewrites, a rule that serves `index.html` for every path (`/* /index.html 200` in `_redirects` on Netlify or Cloudflare Pages) avoids both, and `404.html` can then be removed.
