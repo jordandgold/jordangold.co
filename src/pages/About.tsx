@@ -51,7 +51,7 @@ function About() {
           LinkedIn
         </Link>{" "}
         or send me an{" "}
-        <Link href="mailto:jordandgold@gmail.com" className="link">
+        <Link href="mailto:hello@jordangold.co" className="link">
           email
         </Link>
         .

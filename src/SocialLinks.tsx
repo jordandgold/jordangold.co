@@ -2,7 +2,7 @@ import { Link, List } from "@chakra-ui/react";
 import { LuExternalLink } from "react-icons/lu";
 
 const socialLinks = [
-  { label: "Email", href: "mailto:jordandgold@gmail.com", external: false },
+  { label: "Email", href: "mailto:hello@jordangold.co", external: false },
   { label: "GitHub", href: "https://github.com/jordandgold", external: true },
   {
     label: "LinkedIn",
