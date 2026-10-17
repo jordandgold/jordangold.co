@@ -1,3 +1,4 @@
+import CubeIcon from "../CubeIcon";
 import workdayLogo from "../logos/workday.svg";
 import servicenowLogo from "../logos/servicenow.png";
 
@@ -109,7 +110,10 @@ function Work() {
       <div className="jg__hello">Work</div>
 
       <section className="resume__section">
-        <h2 className="heading resume__label">Experience</h2>
+        <h2 className="heading heading--icon resume__label">
+          <CubeIcon />
+          Experience
+        </h2>
         <div className="resume__content">
           {experience.map((job) => (
             <article className="job" key={job.dates}>
@@ -140,7 +144,10 @@ function Work() {
       </section>
 
       <section className="resume__section">
-        <h2 className="heading resume__label">Skills</h2>
+        <h2 className="heading heading--icon resume__label">
+          <CubeIcon />
+          Skills
+        </h2>
         <div className="resume__content">
           <div className="skills">
             {skills.map((skill) => (

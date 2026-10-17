@@ -253,6 +253,8 @@ code {
 }
 
 .resume__label {
+  /* Don't stretch to the full row height, or the icon and text centre vertically in it */
+  align-self: start;
   margin: 0;
   padding-top: 0.2rem;
 }
