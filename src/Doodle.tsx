@@ -30,6 +30,21 @@ const circlePoints = (
     return [cx + Math.cos(a) * r, cy + Math.sin(a) * r];
   });
 
+// Points along (part of) an ellipse, angles in radians
+const ellipse = (
+  cx: number,
+  cy: number,
+  rx: number,
+  ry: number,
+  from = 0,
+  to = Math.PI * 2,
+  steps = 24,
+): Point[] =>
+  Array.from({ length: steps + 1 }, (_, i): Point => {
+    const a = from + (i / steps) * (to - from);
+    return [cx + Math.cos(a) * rx, cy + Math.sin(a) * ry];
+  });
+
 const shapes: Record<string, () => Point[][]> = {
   smiley: () => [
     circlePoints(0, 0, 0.5),
@@ -136,6 +151,45 @@ const shapes: Record<string, () => Point[][]> = {
     ],
   ],
   circle: () => [circlePoints(0, 0, 0.5, 1.15)],
+  // The cube from the favicon: a hexagon outline that closes exactly on its
+  // start. The outline's corners are rounded when drawn, so the inner edges
+  // stop just short of them instead of poking out past the ends.
+  cube: () => [
+    [
+      [0, -0.5],
+      [0.43, -0.25],
+      [0.43, 0.25],
+      [0, 0.5],
+      [-0.43, 0.25],
+      [-0.43, -0.25],
+      [0, -0.5],
+    ],
+    [
+      [-0.395, -0.23],
+      [0, 0],
+      [0.395, -0.23],
+    ],
+    [
+      [0, 0],
+      [0, 0.46],
+    ],
+  ],
+  cylinder: () => [
+    ellipse(0, -0.34, 0.36, 0.13),
+    [
+      [-0.36, -0.34],
+      [-0.36, 0.34],
+    ],
+    [
+      [0.36, -0.34],
+      [0.36, 0.34],
+    ],
+    ellipse(0, 0.34, 0.36, 0.13, 0, Math.PI),
+  ],
+  sphere: () => [
+    circlePoints(0, 0, 0.46, 1.06),
+    ellipse(0, 0.04, 0.46, 0.14, 0.1, Math.PI - 0.1),
+  ],
 };
 
 // Place a shape: [name, x, y, size, rotation in degrees]. Sparse on purpose:
@@ -153,6 +207,11 @@ const layout: [keyof typeof shapes, number, number, number, number][] = [
   ["circle", 2.08, 0.1, 0.09, 0],
   ["triangle", 0.13, 0.88, 0.1, -12],
   ["tinySquiggle", 2.06, 0.92, 0.12, 6],
+  // 3D shapes
+  ["cube", 0.6, 0.54, 0.24, -8],
+  ["cube", 1.62, 0.15, 0.14, 14],
+  ["cylinder", 1.12, 0.86, 0.17, 4],
+  ["sphere", 0.95, 0.1, 0.13, 0],
 ];
 
 // A tangled, looping squiggle: a few sine waves layered on each axis, which

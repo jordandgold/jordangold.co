@@ -312,13 +312,23 @@ code {
 
 .heading--icon {
   display: flex;
-  align-items: center;
+  /* The icon box is exactly one line tall, so it stays centred on the first
+     line of the label even when the label wraps */
+  align-items: flex-start;
   gap: 0.6rem;
 }
 
+.heading--icon > span[aria-hidden] {
+  display: flex;
+  align-items: center;
+  height: 1.7em;
+}
+
 .cube-icon {
+  box-sizing: content-box;
   width: 1.3em;
   height: 1.3em;
+  padding: 0.2em 0;
   flex-shrink: 0;
   color: var(--link);
 }
@@ -400,17 +410,13 @@ code {
 }
 
 .layout--home {
-  padding-top: 6rem;
+  padding-top: 1.5rem;
 }
 
 @media (max-width: 700px) {
   .layout {
     padding-bottom: 3rem;
     font-size: 17px;
-  }
-
-  .layout--home {
-    padding-top: 2rem;
   }
 
   .divider {
@@ -495,6 +501,7 @@ code {
 
 .doodle {
   position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .doodle__canvas {
@@ -558,4 +565,9 @@ code {
   .doodle__canvas {
     aspect-ratio: 1.7 / 1;
   }
+}
+
+/* About page: same two-column layout as Work, at normal text size */
+.resume__content--text {
+  font-size: 1em;
 }
