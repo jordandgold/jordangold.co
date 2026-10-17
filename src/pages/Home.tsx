@@ -1,3 +1,4 @@
+import Doodle from "../Doodle";
 import logo from "../hello-jordan-gold.svg";
 
 function Home() {
@@ -13,6 +14,7 @@ function Home() {
           </p>
         </div>
       </div>
+      <Doodle />
     </>
   );
 }

@@ -490,3 +490,70 @@ code {
     max-width: 18rem;
   }
 }
+
+.doodle {
+  position: relative;
+}
+
+.doodle__canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 2.2 / 1;
+  /* Ink color: black, or white in dark mode */
+  color: #000;
+  cursor: crosshair;
+  /* Let fingers draw instead of scrolling the page */
+  touch-action: none;
+}
+
+:root[data-theme="dark"] .doodle__canvas {
+  color: #fff;
+}
+
+.doodle__clear {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--divider);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--heading);
+  font-family: "PT Mono", Menlo, Monaco, Consolas, monospace;
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  /* Only visible while hovering (or focusing) the doodle area */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.doodle:hover .doodle__clear,
+.doodle:focus-within .doodle__clear {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Touch screens have no hover, so keep the button available */
+@media (hover: none) {
+  .doodle__clear {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.doodle__clear:hover {
+  background-color: var(--nav-hover);
+}
+
+@media (max-width: 700px) {
+  .doodle__canvas {
+    aspect-ratio: 1.7 / 1;
+  }
+}
