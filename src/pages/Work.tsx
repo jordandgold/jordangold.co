@@ -100,6 +100,7 @@ const skills: { label: string; items: string[] }[] = [
       "Impact Level 4 (IL4)",
       "STIG Remediation",
       "Vulnerability Management",
+      "WCAG 2.1 AA",
     ],
   },
 ];
