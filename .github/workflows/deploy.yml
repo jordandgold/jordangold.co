@@ -1,0 +1,57 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # With a custom domain (public/CNAME) the site lives at the root.
+      # Without one, GitHub serves it from /<repo-name>/.
+      - name: Set base path
+        run: |
+          if [ -f public/CNAME ]; then
+            echo "PUBLIC_URL=" >> "$GITHUB_ENV"
+          else
+            echo "PUBLIC_URL=/${GITHUB_REPOSITORY#*/}" >> "$GITHUB_ENV"
+          fi
+
+      - run: npm run build
+
+      - name: Set base path in 404.html
+        run: sed -i "s|__BASE_PATH__|$PUBLIC_URL|g" build/404.html
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

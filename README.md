@@ -57,8 +57,12 @@ The theme defaults to the system preference and is saved in `localStorage` once 
 
 ## Deployment
 
-`npm run build` outputs the static site to `build/`.
+The site deploys to GitHub Pages from `.github/workflows/deploy.yml` on every push to `master` (or by running the workflow manually from the Actions tab).
 
-The site uses client-side routing, so a direct visit to `/work` or `/about` has no matching file on a static host. `public/404.html` handles this on any host that serves `/404.html` for missing paths (GitHub Pages, Netlify, Cloudflare Pages, Vercel): it saves the requested URL and sends the visitor to `/`, and an inline script in `public/index.html` restores the URL before React Router starts. Paths that don't match a page render `src/pages/NotFound.tsx`.
+One-time setup: in the repo's **Settings → Pages**, set **Source** to **GitHub Actions**.
 
-This costs one quick redirect on direct visits, and the server still answers with a 404 status. If your host supports rewrites, a rule that serves `index.html` for every path (`/* /index.html 200` in `_redirects` on Netlify or Cloudflare Pages) avoids both, and `404.html` can then be removed.
+**Base path.** Without a custom domain, GitHub serves the site from `https://<user>.github.io/<repo>/`, so the workflow builds with `PUBLIC_URL=/<repo>` and the router uses it as its `basename`. When `public/CNAME` exists (a custom domain), the site lives at the root and the base path is empty. To attach a domain, add `public/CNAME` containing the domain, set the domain in Settings → Pages, and add the DNS records.
+
+**Direct visits.** The site uses client-side routing, so `/work` or `/about` has no matching file on a static host. `public/404.html` handles this: it saves the requested URL and sends the visitor to the app root, and an inline script in `public/index.html` restores the URL before React Router starts. The workflow fills in the base path in `404.html`. Paths that don't match a page render `src/pages/NotFound.tsx`. This costs one quick redirect on direct visits, and the server still answers with a 404 status.
+
+To preview a production build locally, run `npm run build`.
