@@ -22,23 +22,29 @@ Open [http://localhost:3000](http://localhost:3000). The page reloads when you e
 ## Project structure
 
 ```
-public/index.html   HTML shell: initial loading spinner and pre-paint theme script
-src/index.tsx       Entry point: applies the theme, then renders the app in BrowserRouter
-src/App.tsx         Layout (navbar, theme toggle, footer) and route definitions
-src/pages/          Home, Work and About pages
-src/theme.ts        Light/dark theme helpers
-src/index.css       All shared styles, theme colors and animations
+public/index.html      HTML shell: loading spinner and pre-paint theme script
+public/404.html        Static-host fallback that makes direct visits to /work, /about, etc. work
+src/index.tsx          Entry point: applies the theme, then renders the app in BrowserRouter
+src/App.tsx            Layout (navbar, theme toggle, footer) and route definitions
+src/pages/             Home, Work, About and NotFound pages
+src/Doodle.tsx         The drawing area on the homepage
+src/SocialLinks.tsx    Email, GitHub and LinkedIn links shown in the footer of every page
+src/CubeIcon.tsx       The cube icon used beside section labels
+src/logos/             Company logos for the Work page
+src/theme.ts           Light/dark theme helpers
+src/index.css          All shared styles, theme colors and animations
 ```
 
 ## Routes
 
-| Path     | Page  |
-| -------- | ----- |
-| `/`      | Home  |
-| `/work`  | Work  |
-| `/about` | About |
+| Path     | Page      |
+| -------- | --------- |
+| `/`      | Home      |
+| `/work`  | Work      |
+| `/about` | About     |
+| `*`      | Not found |
 
-Any other path redirects to `/`.
+Any other path renders the 404 page (`src/pages/NotFound.tsx`) at the same URL. It does not redirect.
 
 ## Styling
 

@@ -1,5 +1,5 @@
-import Doodle from "../Doodle"
-import logo from "../hello-jordan-gold.svg"
+import Doodle from "../Doodle";
+import logo from "../hello-jordan-gold.svg";
 
 function Home() {
   return (
@@ -16,7 +16,7 @@ function Home() {
       </div>
       <Doodle />
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

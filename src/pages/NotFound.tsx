@@ -1,8 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 function NotFound() {
   return (
-    <>
+    <div className="notfound">
+      <div className="notfound__emoji" role="img" aria-label="Compass">
+        🛸
+      </div>
       <div className="jg__hello">404</div>
       <h2 className="heading">Page not found</h2>
       <p>
@@ -12,8 +15,8 @@ function NotFound() {
         </Link>{" "}
         or try one of the links above.
       </p>
-    </>
-  );
+    </div>
+  )
 }
 
-export default NotFound;
+export default NotFound
