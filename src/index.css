@@ -501,7 +501,8 @@ code {
 
 .doodle {
   position: relative;
-  margin-bottom: 1.5rem;
+  /* Padding, not margin: a margin would collapse into the divider's own margin */
+  padding-bottom: 2rem;
 }
 
 .doodle__canvas {

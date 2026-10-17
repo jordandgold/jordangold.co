@@ -1,5 +1,5 @@
-import Doodle from "../Doodle";
-import logo from "../hello-jordan-gold.svg";
+import Doodle from "../Doodle"
+import logo from "../hello-jordan-gold.svg"
 
 function Home() {
   return (
@@ -10,13 +10,13 @@ function Home() {
           <div className="jg__hello">Hello,</div>
           <p>
             my name is Jordan Gold. I'm a software enginer and web developer
-            based in Chicago, Illinois.
+            based in Chicago, Illinois. 🏃 🚀 🌈
           </p>
         </div>
       </div>
       <Doodle />
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

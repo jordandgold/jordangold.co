@@ -16,6 +16,11 @@ const sections = [
     title: "Running",
     text: "Outside of work, you'll usually find me running. It clears my head, keeps me honest about showing up consistently, and it has taught me the same lesson as engineering: steady progress, one mile (or one commit) at a time, beats occasional bursts of effort.",
   },
+  {
+    emoji: "🥕",
+    title: "Cooking",
+    text: "I'm a passionate home cook. It scratches the same itch as building software: start with good ingredients, follow a plan, then taste, adjust and iterate until it's right. The best part is the same too, getting to share the result with people.",
+  },
 ];
 
 function Section({
